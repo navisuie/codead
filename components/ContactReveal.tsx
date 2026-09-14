@@ -7,7 +7,10 @@ export default function ContactReveal({ email }: { email: string }) {
 
   if (revealed) {
     return (
-      <a href={`mailto:${email}`} className="text-sm font-medium text-zinc-900 underline">
+      <a
+        href={`mailto:${email}`}
+        className="shrink-0 rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent hover:bg-accent/15"
+      >
         {email}
       </a>
     );
@@ -16,7 +19,7 @@ export default function ContactReveal({ email }: { email: string }) {
   return (
     <button
       onClick={() => setRevealed(true)}
-      className="text-sm font-medium text-zinc-900 underline underline-offset-2"
+      className="shrink-0 rounded-full border border-stone-300 px-3 py-1.5 text-sm font-medium text-stone-700 hover:border-stone-400 hover:bg-stone-50"
     >
       Reveal email
     </button>

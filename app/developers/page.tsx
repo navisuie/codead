@@ -12,41 +12,45 @@ export default async function DevelopersPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-6 py-12">
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Developers</h1>
-        <Link
-          href="/developers/new"
-          className="rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700"
-        >
+    <div className="mx-auto w-full max-w-4xl px-6 py-16">
+      <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <h1 className="text-2xl font-semibold text-stone-900">Developers</h1>
+          <p className="mt-1 text-sm text-stone-600">
+            Developers who build small-business landing pages.
+          </p>
+        </div>
+        <Link href="/developers/new" className="btn-primary">
           List yourself
         </Link>
       </div>
 
       {!developers?.length && (
-        <p className="text-zinc-600">No developers listed yet.</p>
+        <div className="card flex flex-col items-center gap-3 px-6 py-16 text-center">
+          <p className="text-stone-600">No developers listed yet — be the first.</p>
+          <Link href="/developers/new" className="btn-secondary">
+            List yourself
+          </Link>
+        </div>
       )}
 
       <ul className="flex flex-col gap-4">
         {developers?.map((dev) => (
-          <li key={dev.id} className="rounded-lg border border-zinc-200 bg-white p-5">
+          <li key={dev.id} className="card p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="font-semibold">{dev.name}</h2>
+                <h2 className="font-semibold text-stone-900">{dev.name}</h2>
                 {dev.rate_range && (
-                  <p className="text-sm text-zinc-500">{dev.rate_range}</p>
+                  <p className="mt-0.5 text-sm text-stone-500">{dev.rate_range}</p>
                 )}
               </div>
               <ContactReveal email={dev.email} />
             </div>
-            {dev.bio && <p className="mt-3 text-sm text-zinc-700">{dev.bio}</p>}
+            {dev.bio && <p className="mt-3 text-sm text-stone-700">{dev.bio}</p>}
             {dev.skills?.length > 0 && (
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-2">
                 {dev.skills.map((skill: string) => (
-                  <span
-                    key={skill}
-                    className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-700"
-                  >
+                  <span key={skill} className="badge">
                     {skill}
                   </span>
                 ))}
@@ -57,9 +61,9 @@ export default async function DevelopersPage() {
                 href={dev.portfolio_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-block text-sm text-zinc-600 underline"
+                className="mt-4 inline-block text-sm font-medium text-accent hover:underline"
               >
-                Portfolio
+                View portfolio →
               </a>
             )}
           </li>
