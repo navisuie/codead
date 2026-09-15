@@ -4,33 +4,21 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
-import SignInForm from "@/components/SignInForm";
+import { useUser } from "@/lib/useUser";
 
 export default function NewDeveloperPage() {
-  const supabase = createClient();
-  const [user, setUser] = useState<User | null>(null);
-  const [checkingSession, setCheckingSession] = useState(true);
+  const { user, loading } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user);
-      setCheckingSession(false);
-    });
-  }, [supabase]);
+    if (!loading && !user) router.replace("/login");
+  }, [loading, user, router]);
 
-  if (checkingSession) return null;
+  if (loading || !user) return null;
 
   return (
     <div className="mx-auto w-full max-w-md px-6 py-16">
-      {user ? (
-        <ProfileForm user={user} />
-      ) : (
-        <SignInForm
-          heading="List yourself as a developer"
-          subtext="We'll email you a sign-in link — no password needed."
-          redirectPath="/developers/new"
-        />
-      )}
+      <ProfileForm user={user} />
     </div>
   );
 }
