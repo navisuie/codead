@@ -152,9 +152,11 @@ function PasswordForm({ redirectPath }: { redirectPath: string }) {
         <input
           id="password"
           required
-          minLength={6}
+          minLength={8}
+          pattern="(?=.*[a-zA-Z])(?=.*[0-9]).{8,}"
+          title="At least 8 characters, with a letter and a number"
           type="password"
-          placeholder="At least 6 characters"
+          placeholder="At least 8 characters, with a letter and a number"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="field-input"
