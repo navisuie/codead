@@ -53,13 +53,13 @@ export default function LoginPage() {
       {role === "customer" ? (
         <SignInForm
           heading="Post a project"
-          subtext="We'll email you a sign-in link — no password needed."
+          subtext="Create an account or sign in to get started."
           redirectPath="/jobs/new"
         />
       ) : (
         <SignInForm
           heading="List yourself as a developer"
-          subtext="We'll email you a sign-in link — no password needed."
+          subtext="Create an account or sign in to get started."
           redirectPath="/developers/new"
         />
       )}
