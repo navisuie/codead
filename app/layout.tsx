@@ -41,8 +41,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <Link href="/jobs" className="hidden hover:text-stone-950 sm:inline">
                 Job board
               </Link>
-              <Link href="/jobs/new" className="btn-primary !px-4 !py-2 text-xs">
-                Post a project
+              <Link href="/login" className="hidden hover:text-stone-950 sm:inline">
+                Log in
+              </Link>
+              <Link href="/login" className="btn-primary !px-4 !py-2 text-xs">
+                Get started
               </Link>
             </div>
           </nav>
